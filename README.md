@@ -2,12 +2,12 @@
 
 ## 下面是各目录的说明。
 
-    --- base_libiary 这个目录是放置的一些公共代码
     --- dist 这个目录是线上编译出来的代码，属于最终用户访问的代码，不添加到git托管，现在是为了说明目录结构才进行托管
         --- 源码目录中对应的最终代码目录，仅仅只放html文件
         --- static 放置静态文件的地方，真实环境中为CDN的目录地址
     --- nuts 这个目录是gulp的任务和配置目录
         --- task 任务目录
+        --- baseFiles 基础文件目录，存放新建项目所需的模板
         --- util 工具目录
         --- main.js gulp的入口文件
     --- src 源代码目录，所有的源代码都托管在这里
@@ -46,7 +46,7 @@ npm install
 -   运行初始化命令
 
 ```
-npm run release
+node node_module/wishbao index --release
 ```
 
 -   修改配置文件
@@ -66,7 +66,7 @@ npm run release
     * cdn 目录下项目中包含的图片，字体，css和js文件都会缓存
     * cdn 更新通过发布新版本进行更新
     * 项目中的html文件不在缓存中！
-    * 例子：http://www-static1.iduobao.net/duobao-activity/transfer6/1.1.1/css/transfer6.css
+    * 例子：http://cdn.jonyf.net/activity/test/1.1.1/css/test.css
 
 ### 开发环境说明：
 
