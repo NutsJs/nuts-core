@@ -4,7 +4,10 @@
 
 'use strict';
 
-const config = {
+//引入gulp的入口文件
+let nuts = require('./nuts/controller');
+
+nuts.config = {
 
     // 判断是否是活动项目
     'activity': false,
@@ -27,30 +30,17 @@ const config = {
     // 项目作者
     'author': 'jonnyf',
 
-    // 公共基础库
-    'baseLibrary': '',
+    // 开发时的编译目录
+    'devDir': 'dev',
+
+    // 编译是否需要添加 cdn
+    'needCDN': true,
 
     // 默认的CDN路径
     'staticURL': 'http://cdn.jonnyf.com/duobao',
 
-    // 最新的安卓版本号
-    'androidVer': '1.1.0'
+    // 最新的安卓版本号 int型
+    'androidVer': '120'
 };
-
-// webpack的配置文件,一般情况下不需要修改
-const webpack = {
-    test: /\.js$/,
-    loader: 'babel-loader',
-    exclude: './node_modules/',
-    query: {
-        presets: ['es2015']
-    }
-};
-
-//引入gulp的入口文件
-let nuts = require('./nuts/main');
-
-nuts.config = config;
-nuts.webpack = webpack;
 
 nuts.run();

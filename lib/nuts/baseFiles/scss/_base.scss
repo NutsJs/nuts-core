@@ -14,9 +14,14 @@
     overflow: hidden;
 }
 
-//在使用雪碧图的时候计算放大倍数
-@function percent($new, $old) {
-    @return ($new / $old) * 100%;
+//盒子布局函数
+@mixin box($align: center, $pack: center){
+    $prefix-list: -webkit, -moz;
+    @each $prefix in $prefix-list {
+        display: #{$prefix}-box;
+        #{$prefix}-box-align: $align;
+        #{$prefix}-box-pack: $pack;
+    }
 }
 
 //将px转换成rem
