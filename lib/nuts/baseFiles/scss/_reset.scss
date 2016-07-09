@@ -16,8 +16,13 @@ html {
     font-family: Helvetica, sans-serif;
 }
 
+body {
+    //clear click shadow in ios
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
 /**
- *  移动设备常用mediaquery
+ *  移动设备常用mediaQuery
  *  应用于1024px以下设备
  *  移动设备的基本字体为16px
  */
