@@ -1,6 +1,6 @@
 # Nuts前端构建工具
 [![npm](https://img.shields.io/npm/v/wishbao.svg?style=flat)](https://www.npmjs.com/package/wishbao)
-[![npm](https://img.shields.io/npm/l/wishbao.svg?maxAge=2592000)](https://www.npmjs.com/package/wishbao)
+[![npm](https://img.shields.io/npm/l/wishbao.svg?style=flat)](https://www.npmjs.com/package/wishbao)
 
 > 这是一个基于 gulp 的前端工程构建集合，包括了最常见的新建项目，开发项目和最后的编译发布项目。其中 JavaScript 支持 ES2015 的语法，CSS 部分采用 SASS + Compass 的组合。
 
@@ -13,7 +13,7 @@
     --- dev 开发模式下的目标文件夹。
     --- nuts 这个目录是gulp的任务和配置目录
         --- task 任务目录
-        --- baseFiles 基础文件目录，存放新建项目所需的模板
+        --- templets 基础文件目录，存放新建项目所需的模板
         --- util 工具目录
         --- controller.js 构建工具的入口文件
     --- src 源代码目录，所有的源代码都托管在这里
@@ -79,7 +79,8 @@ node node_module/wishbao index --release
 #### 执行命令：
 
 ```
-gulp create --name xxxx
+// 新建项目支持下划线的命名方式, 项目会按照驼峰命名的方式进行下划线的转换
+gulp create --name xxxx  
 
 gulp dev --name xxxx --port 2333
 

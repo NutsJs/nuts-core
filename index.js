@@ -5,6 +5,7 @@
 const fs       = require('fs'),
       path     = require('path'),
       minimist = require('minimist'),
+      del      = require('del'),
       stat     = fs.stat;
 
 let _build   = minimist(process.argv.slice(2)).build,
@@ -12,10 +13,14 @@ let _build   = minimist(process.argv.slice(2)).build,
 
 if (!!_build) {
     // 复制目录
-    exists(path.resolve(__dirname, './lib'), process.cwd(), copy);
+    del('./nuts').then(()=> {
+        console.log('旧项目已删除');
+        exists(path.resolve(__dirname, './lib'), process.cwd(), copy);
+        console.log('新项目已建立');
+    });
 }
 
-if (!!_release){
+if (!!_release) {
     exists('./nuts', './lib/nuts', copy);
 }
 
