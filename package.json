@@ -1,6 +1,6 @@
 {
   "name": "wishbao",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "This project is to wishbao gulp work.",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,6 @@
     "gulp-connect": "^4.1.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
     "minimist": "^1.2.0",
     "qrcode-terminal": "^0.10.0",
     "through2": "^2.0.1",
