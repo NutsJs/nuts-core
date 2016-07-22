@@ -39,7 +39,7 @@ nuts.config = {
     // 默认的CDN路径
     'staticURL': 'http://cdn.jonnyf.com/duobao',
 
-    // 最新的安卓版本号 int型
+    // 最新的安卓版本号 int型, 代码中的占位符为 @@androidVer
     'androidVer': '120'
 };
 
