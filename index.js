@@ -17,6 +17,9 @@ if (!!_build) {
         console.log('旧项目已删除');
         exists(path.resolve(__dirname, './lib'), process.cwd(), copy);
         console.log('新项目已建立');
+        if (!fs.existsSync(path.resolve(process.cwd(), `./src/`))){
+            fs.mkdirSync(path.resolve(process.cwd(), `./src`));
+        }
     });
 }
 

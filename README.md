@@ -26,14 +26,6 @@
 
 > 初始化的时候执行以下命令安装必要的依赖
 
--	compass编译工具
-
-	-	gem install compass
-
--	compass中引用的第三方库animation
-
-	-	gem install animation --pre
-
 -	nodejs运行环境  
     * node >= 6.2.0 npm >= 3.8.9
 
@@ -90,6 +82,10 @@ gulp clean
 * 安装之后修改配置文件之后就可以通过 create 命令来创建新的项目了。
 * 项目默认监听端口号2333，在浏览器中打开 http://localhost:2333 即可看到当前项目页面，如果端口号冲突或者同时启动多个项目则在 dev 命令后面添加 --port 参数来动态修改端口号。
 * 关于具体配置的内容，请查看配置文件中的说明。
+
+### 更新日志 [CHANGELOG]
+
+[CHANGELOG]: CHANGELOG.md
 
 ### 前端代码开发规范
 

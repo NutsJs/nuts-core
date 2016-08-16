@@ -37,10 +37,14 @@ nuts.config = {
     'needCDN': true,
 
     // 默认的CDN路径
-    'staticURL': 'http://cdn.jonnyf.com/duobao',
+    'staticURL': 'http://cdn.jonnyf.com/images',
 
-    // 最新的安卓版本号 int型, 代码中的占位符为 @@androidVer
-    'androidVer': '120'
+    // 最新的安卓版本号 int 型, 代码中的占位符为 @@androidVer
+    'androidVer': '120',
+
+    // 引入的 sass 库,默认采用了 nuts-scss 库,使用时需要先安装。传入的值需要是一个数组。
+    // 'sassLib': []
+    'sassLib': require('nuts-scss').includePaths
 };
 
 nuts.run();
