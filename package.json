@@ -1,6 +1,6 @@
 {
   "name": "wishbao",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "This project is to wishbao gulp work.",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,9 @@
   },
   "keywords": [
     "work",
-    "gulp"
+    "gulp",
+    "workflow",
+    "scss"
   ],
   "author": "jonnyf",
   "license": "MIT",

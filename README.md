@@ -77,6 +77,8 @@ gulp create --name xxxx
 gulp dev --name xxxx --port 2333
 
 gulp clean
+
+gulp include --name xxxx
 ```
 
 * 安装之后修改配置文件之后就可以通过 create 命令来创建新的项目了。
