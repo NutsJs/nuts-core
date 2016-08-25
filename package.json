@@ -1,6 +1,6 @@
 {
   "name": "wishbao",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "This project is to wishbao gulp work.",
   "main": "index.js",
   "scripts": {
