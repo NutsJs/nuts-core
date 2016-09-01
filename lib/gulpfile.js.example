@@ -9,9 +9,6 @@ let nuts = require('./nuts/controller');
 
 nuts.config = {
 
-    // 判断是否是活动项目
-    'activity': false,
-
     // 本地开发服务器监听的端口号
     'serverPort': 2333,
 
