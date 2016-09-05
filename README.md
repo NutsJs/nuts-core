@@ -89,17 +89,3 @@ gulp include --name xxxx
 ### 更新日志 [CHANGELOG]
 
 [CHANGELOG]: CHANGELOG.md
-
-### 前端代码开发规范
-
-#### 代码书写规范 [CodeGuide]
-
-[CodeGuide]: http://alloyteam.github.io
-
-#### 项目开发规范 [git-flow]
-
-* 首先开始新活动时需要先从develop分支上新开feature-分支。
-* 开发完成后需要添加merge requests。
-* 如果发现线上bug时需要在master分支上新开hotfix分支进行修正。
-
-[git-flow]: http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html
