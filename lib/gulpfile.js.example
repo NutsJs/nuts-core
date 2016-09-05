@@ -22,7 +22,7 @@ nuts.config = {
     'staticDir': 'static',
 
     // 开发环境中需要开发的项目名称
-    'name': 'test',
+    'name': 'example',
 
     // 项目作者
     'author': 'jonnyf',
