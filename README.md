@@ -1,7 +1,7 @@
 # Nuts前端构建工具
 [![npm](https://img.shields.io/npm/v/wishbao.svg?style=flat)](https://www.npmjs.com/package/wishbao)
 [![npm](https://img.shields.io/npm/l/wishbao.svg?style=flat)](https://www.npmjs.com/package/wishbao)
-[![npm](https://img.shields.io/npm/dt/wishbao.svg?maxAge=2592000)](https://www.npmjs.com/package/wishbao)
+[![npm](https://img.shields.io/npm/dt/wishbao.svg?style=flat)](https://www.npmjs.com/package/wishbao)
 
 > 这是一个基于 gulp 的前端工程构建集合，包括了最常见的新建项目，开发项目和最后的编译发布项目。其中 JavaScript 支持 ES2015 的语法，CSS 部分采用 SCSS。
 
