@@ -25,6 +25,7 @@ function taskController(config) {
 
     switch (taskName) {
         case 'create':
+            require('../tasks/create')(name);
             break;
         case 'init':
             require('../tasks/init')(configPath);
