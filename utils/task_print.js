@@ -1,12 +1,9 @@
 /**
  * 自定义的gulp插件，用于在文件流中输出信息
  * @param opt
- * Created by jonnyf on 2015-12-6.
+ * Created by fuhuixiang on 2016-9-25.
  */
-
 'use strict';
-
-const through = require('through2');
 
 module.exports = (opt) => {
 
@@ -33,9 +30,8 @@ module.exports = (opt) => {
             return;
     }
 
-
     // 返回文件 stream
-    return through.obj(function (file, enc, cb) {
+    return require('through2').obj(function (file, enc, cb) {
 
         // 确保文件进去下一个插件
         this.push(file);
