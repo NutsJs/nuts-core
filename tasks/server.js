@@ -12,12 +12,12 @@ const path          = require('path'),
       config        = require(path.resolve(process.cwd(), 'nuts.config.json'));
 
 module.exports = (option, callback)=> {
-    let {port, proName} = option;
+    let {port, name} = option;
 
     probe(port, (exists) => {
         if (exists) {
             connectPlugin.server({
-                root: `${config.devDir}/${proName}`,
+                root: `${config.devDir}/${name}`,
                 port: port,
                 host: getSelfIP(),
                 livereload: true

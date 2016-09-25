@@ -24,7 +24,7 @@ const configData = {
 
     "staticURL": "http://cdn.jonnyf.com/duobao",
 
-    "androidVer": 120,
+    "replaceStr": 120,
 
     "sassLib": []
 };
