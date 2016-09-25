@@ -1,8 +1,8 @@
 {
   "name": "wishbao",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "description": "This project is to nuts gulp workflow.",
-  "main": "index.js",
+  "main": "./bin/nuts.js",
   "scripts": {
     "test": "node index --build",
     "release": "node index --release"

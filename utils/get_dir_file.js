@@ -1,9 +1,8 @@
 /**
  * 通过传入的地址返回其中的所有文件路径
  * @param dir
- * Created by jonnyf on 2015-12-4.
+ * Created by fuhuixiang on 2016-9-25.
  */
-
 'use strict';
 
 const fs   = require('fs'),
