@@ -9,3 +9,4 @@ dist/
 nuts/
 !lib/nuts
 dev/
+nuts.config.json

@@ -7,14 +7,23 @@
 const webpack = require('webpack');
 
 module.exports = (devType)=> {
+    let _preset = null;
+    // 判断当前环境来加载对应的插件
+    try {
+        _preset = require.resolve('../../babel-preset-es2015');
+    } catch (err){
+        _preset = require.resolve('../node_modules/babel-preset-es2015')
+    }
     return {
         watch: false,
         module: {
             loaders: [
                 {
-                    test: /\.js$/, loader: require.resolve('babel-loader'), exclude: './node_modules/',
+                    test: /\.js$/,
+                    loader: require.resolve('babel-loader'),
+                    exclude: require('path').resolve(__dirname, '../node_modules/'),
                     query: {
-                        presets: [require.resolve('../node_modules/babel-preset-es2015')]
+                        presets: [_preset]
                     }
                 }
             ]
