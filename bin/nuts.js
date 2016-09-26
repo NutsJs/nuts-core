@@ -9,7 +9,11 @@ const fs         = require('fs'),
 
 fs.exists(configPath, (exists)=> {
     if (exists) {
-        taskController(require(configPath));
+        try {
+            require(path.resolve(process.cwd(), '../node_modules/wishbao'));
+        } catch (err) {
+            taskController(require(configPath));
+        }
     } else {
         if (minimist['_'][0] == 'init') {
             require('../tasks/init')(configPath);
