@@ -12,9 +12,9 @@ module.exports = (devType)=> {
         module: {
             loaders: [
                 {
-                    test: /\.js$/, loader: 'babel-loader', exclude: './node_modules/',
+                    test: /\.js$/, loader: require.resolve('babel-loader'), exclude: './node_modules/',
                     query: {
-                        presets: ['es2015']
+                        presets: [require.resolve('../node_modules/babel-preset-es2015')]
                     }
                 }
             ]

@@ -27,7 +27,7 @@ module.exports = (cleanDirs)=> {
     });
 
     if (flag) {
-        _del(cleanDirs, cb);
+        del(cleanDirs);
         delChinese(config.sourceDir, (err, files)=> {
             files.forEach((v)=> {
                 if (v.match(/[\u4E00-\u9FA5\uF900-\uFA2D]/)) {

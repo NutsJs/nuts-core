@@ -26,7 +26,7 @@ module.exports = (proName)=> {
      * 最后在主 scss 文件中引入新建的静态资源文件。
      */
     firFiles(`${devDir}/images/`, (err, files)=> {
-        let _staticData = '';
+        let _staticData = '@charset "utf-8";\n';
         if (err) {
             console.log(`${err.path}目录不存在`);
             return null;

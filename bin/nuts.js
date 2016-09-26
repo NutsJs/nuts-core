@@ -11,7 +11,11 @@ fs.exists(configPath, (exists)=> {
     if (exists) {
         taskController(require(configPath));
     } else {
-        console.log('未检测到配置文件，请先执行 init 命令创建配置文件');
+        if (minimist['_'][0] == 'init') {
+            require('../tasks/init')(configPath);
+        } else {
+            console.log('未检测到配置文件，请先执行 init 命令创建配置文件');
+        }
     }
 });
 
@@ -25,10 +29,7 @@ function taskController(config) {
 
     switch (taskName) {
         case 'create':
-            require('../tasks/create')(name);
-            break;
-        case 'init':
-            require('../tasks/init')(configPath);
+            require('../tasks/create')(name || config.name);
             break;
         case 'include':
             require('../tasks/include')(name);
@@ -38,7 +39,7 @@ function taskController(config) {
             break;
         case 'dev':
             hasProject(name, ()=> {
-                require('../tasks/dev')(name, port);
+                require('../tasks/dev')(name, port || config.serverPort);
             });
             break;
         case 'build':
@@ -50,7 +51,6 @@ function taskController(config) {
             console.log('没有这个任务!');
             break;
     }
-    console.log(config);
 }
 
 /**

@@ -46,7 +46,10 @@ function* createProject(devDir, name) {
     });
 
     yield task.src(`${templetPath}/index.html`)
-        .pipe(replacePlugin('@@main', name))
+        .pipe(replacePlugin({
+            '@@main': name,
+            '@@title': config.title
+        }))
         .pipe(task.dest(`${devDir}/`));
 
     yield task.src(`${templetPath}/scss/main.scss`)

@@ -10,6 +10,7 @@ const fs            = require('fs'),
       server        = require('./server'),
       sassPlugin    = require('gulp-sass'),
       connectPlugin = require('gulp-connect'),
+      plumberPlugin = require('gulp-plumber'),
       renamePlugin  = require('gulp-rename'),
       streamPlugin  = require('webpack-stream'),
       replacePlugin = require('gulp-replace-pro'),
@@ -73,7 +74,7 @@ module.exports = (proName, port)=> {
  */
 function compassSass(input, output) {
     task.src(input)
-    // .pipe(controller.packages._plumber())
+        .pipe(plumberPlugin())
         .pipe(sassPlugin({
             includePaths: config.sassLib
         }))
@@ -89,7 +90,7 @@ function compassSass(input, output) {
  */
 function es6ToEs5(input, output, proName) {
     task.src(input)
-    // .pipe(controller.packages._plumber())
+        .pipe(plumberPlugin())
         .pipe(streamPlugin(webConfig))
         .pipe(renamePlugin(`${proName}.min.js`))
         .pipe(replacePlugin('@@replace', config.replaceStr || ''))
@@ -104,7 +105,7 @@ function es6ToEs5(input, output, proName) {
  */
 function compassFile(input, output) {
     task.src(input)
-    // .pipe(controller.packages._plumber())
+        .pipe(plumberPlugin())
         .pipe(connectPlugin.reload())
         .pipe(task.dest(output));
 }

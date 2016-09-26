@@ -11,6 +11,7 @@ const fs            = require('fs'),
       task          = require('gulp'),
       sassPlugin    = require('gulp-sass'),
       renamePlugin  = require('gulp-rename'),
+      plumberPlugin = require('gulp-plumber'),
       streamPlugin  = require('webpack-stream'),
       replacePlugin = require('gulp-replace-pro'),
       taskIf        = require('../utils/task_if'),
@@ -54,7 +55,7 @@ function outDist(buildDir, nowVersion, devDir) {
             console.log('js路径不存在');
         } else {
             task.src(`${devDir}/js/*.js`)
-            // .pipe(pkg._plumber())
+                .pipe(plumberPlugin())
                 .pipe(streamPlugin(webConfig))
                 .pipe(renamePlugin(`${buildName}.min.js`))
                 .pipe(taskIf(config.needCDN, replacePlugin('(\.\.\/\i|\i)mages', `${buildCDNDir}/images`)))
@@ -83,7 +84,7 @@ function outDist(buildDir, nowVersion, devDir) {
         } else {
             task.src(`${devDir}/scss/*.scss`)
                 .pipe(printMes('css'))
-                // .pipe(pkg._plumber())
+                .pipe(plumberPlugin())
                 .pipe(sassPlugin({
                     includePaths: config.sassLib,
                     outputStyle: 'compressed'
@@ -97,7 +98,7 @@ function outDist(buildDir, nowVersion, devDir) {
     });
 
     // 部署html文件，并替换文件中的静态资源
-    task.src(devDir + '/*.html')
+    task.src(`${devDir}/*.html`)
         .pipe(printMes('html'))
         .pipe(replacePlugin({
             'href="css/': `href="${buildCDNDir}/css/`,

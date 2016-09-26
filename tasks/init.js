@@ -7,26 +7,17 @@
 const fs = require('fs');
 const configData = {
     "serverPort": 2333,
-
     "sourceDir": "src",
-
     "distDir": "dist",
-
     "staticDir": "static",
-
     "name": "example",
-
     "author": "jonnyf",
-
+    "title": "exampleTitle",
     "devDir": "dev",
-
     "needCDN": true,
-
     "staticURL": "http://cdn.jonnyf.com/duobao",
-
     "replaceStr": 120,
-
-    "sassLib": []
+    "sassLib": require('nuts-scss').includePaths
 };
 
 module.exports = (configPath)=> {
