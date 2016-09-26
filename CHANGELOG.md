@@ -3,6 +3,18 @@
 
 > 以下带有 [update] 前缀的为不兼容更新，需要注意。而带有 [fix] 前缀的更新为异常修复，建议尽快更新。
 
+## 3.0.0
+
+* [update] 安装方式改为全局安装, 现在可以在全局中使用下面的命令了。
+* [update] 更新了 gulp 的版本（3.x=>4.x）。
+* [update] 新增了 nuts init 命令。
+* [update] 更新了 gulp create 命令 => nuts create。
+* [update] 更新了 gulp dev 命令 => nuts dev。
+* [update] 更新了 gulp build 命令 => nuts build。
+* [update] 更新了 gulp include 命令 => nuts include。
+* [update] 更新了 gulp clean 命令 => nuts clean。
+* [fix] 修复一些积累的问题。
+
 ## 2.1.4
 
 * [fix] 修复 build 命令静态资源重复替换的问题。

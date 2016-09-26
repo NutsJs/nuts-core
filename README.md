@@ -1,90 +1,128 @@
-# Nuts前端构建工具
+# Nuts 前端构建工具
 [![npm](https://img.shields.io/npm/v/wishbao.svg?style=flat)](https://www.npmjs.com/package/wishbao)
 [![npm](https://img.shields.io/npm/l/wishbao.svg?style=flat)](https://www.npmjs.com/package/wishbao)
 [![npm](https://img.shields.io/npm/dt/wishbao.svg?style=flat)](https://www.npmjs.com/package/wishbao)
 
-> 这是一个基于 gulp 的前端工程构建集合，包括了最常见的新建项目，开发项目和最后的编译发布项目。其中 JavaScript 支持 ES2015 的语法，CSS 部分采用 SCSS。
+> 这是一个基于 gulp#4.x 的前端工程构建集合，包括了最常见的新建项目，开发项目和最后的编译发布项目。其中 JavaScript 支持 ES2015 的语法，CSS 部分采用 SCSS。
 
 
-### 目录结构说明。
+### 新建项目目录结构说明。
 
-    --- dist 这个目录是线上编译出来的代码，属于最终用户访问的代码，不添加到git托管。
+    --- dist 这个目录是线上编译出来的代码，属于最终用户访问的代码。
         --- 源码目录中对应的最终代码目录，仅仅只放html文件
         --- static 放置静态文件的地方，真实环境中为CDN的目录地址
     --- dev 开发模式下的目标文件夹。
-    --- nuts 这个目录是gulp的任务和配置目录
-        --- task 任务目录
-        --- templets 基础文件目录，存放新建项目所需的模板
-        --- util 工具目录
-        --- controller.js 构建工具的入口文件
-    --- src 源代码目录，所有的源代码都托管在这里
-            --- test 具体的项目代码目录
-    --- gulpfile.js 配置文件
+    --- src 源代码目录，所有的源代码都放在这里
+    --- nuts.config.json 配置文件
     --- package.json 项目的依赖说明文件，可用于初始化项目和安装依赖包
-    --- README.md 项目的说明文件
+
     
 ### 工具安装
 
 > 初始化的时候执行以下命令安装必要的依赖
 
 -	nodejs运行环境  
-    * node >= 6.2.0 npm >= 3.8.9
+    * node >= 6.6.0 npm >= 3.10.3
 
 ```
-    npm install -g n    
-    n stable
+$ npm install -g n
+$ n stable
 ```
 
 -    通过 npm 进行安装
 
 ```
-npm install wishbao
+$ npm install -g wishbao
 ```
 
--   运行初始化命令
 
+## Nuts 文档
+
+#### 初始化项目：
 ```
-node node_module/wishbao index --release
+$ nuts init
 ```
 
--   修改配置文件
-
-> 修改gulpfile.js.example为gulpfile.js，并填写CDN路径等配置内容到文件中。
-
-### 如何部署代码？
-
-#### 执行命令：
-
--   gulp build --dir xxx
-    - 例如： gulp build --dir test
-    - 如果需要编译出指定版本请在后面添加 --ver 参数
-    - 例如： gulp build --dir test --ver 1.2.0
-    - 服务器需要修改gulpfile文件中的配置信息为线上信息
-    
-#### 关于CDN：cdn根目录的子目录 cdn_dir/指向dist/static/
-    * cdn 项目中包含的图片，字体，css和js文件都会部署到 CDN 目录中。
-    * cdn 更新通过发布新版本进行更新。
-    * 项目中的html文件不在缓存中！
-    * 例子：http://cdn.jonyf.com/cdn_dir/test/1.1.1/css/test.css
-
-### 开发环境说明：
-
-#### 执行命令：
-
+#### 新建项目：
 ```
 // 新建项目支持下划线的命名方式, 项目会按照驼峰命名的方式进行下划线的转换
-gulp create --name xxxx  
 
-gulp dev --name xxxx --port 2333
-
-gulp clean
-
-gulp include --name xxxx
+$ nuts create --name <项目名称>
 ```
 
+#### 开发项目：
+```
+$ nuts dev --name <项目名称> --port <端口号>
+```
+
+#### 清除缓存：
+```
+$ nuts clean
+```
+
+#### 编译项目：
+```
+// 如果需要编译出指定版本请在后面添加 --ver 参数
+$ nuts build --dir <项目名称> [--ver <指定版本号>]
+```
+
+#### 导入静态资源：
+```
+$ nuts include --name <项目名称>
+```
+
+### 命令说明：
 * 安装之后修改配置文件之后就可以通过 create 命令来创建新的项目了。
 * 项目默认监听端口号2333，在浏览器中打开 http://localhost:2333 即可看到当前项目页面，如果端口号冲突或者同时启动多个项目则在 dev 命令后面添加 --port 参数来动态修改端口号。
 * 关于具体配置的内容，请查看配置文件中的说明。
+
+### 配置文件说明：
+```javascript
+{
+	// 本地开发服务器监听的端口号
+    "serverPort": 2333,
+    
+	// 开发环境中的源码路径
+    "sourceDir": "src",
+
+	// 需要部署的目标路径
+    "distDir": "dist",
+
+	// 目标路径中静态文件需要放置的目录
+    "staticDir": "static",
+
+	// 开发环境中需要开发的项目名称
+    "name": "example",
+
+	// 项目作者
+    "author": "jonnyf",
+
+	// 开发时的编译目录
+    "devDir": "dev",
+
+	// 编译是否需要添加 cdn
+    "needCDN": true,
+
+	// 默认的CDN路径
+    "staticURL": "http://cdn.jonnyf.com/images",
+
+    "androidVer": 120,
+
+	// 引入的 sass 库,默认采用了 nuts-scss 库,使用时需要先安装。传入的值需要是一个数组。
+    // 'sassLib': []
+    "sassLib": require('nuts-scss').includePaths
+}
+```
+
+### 关于 CDN：
+> cdn 根目录的子目录 cdn_dir/指向dist/static/
+
+```
+* cdn 项目中包含的图片，字体，css和js文件都会部署到 CDN 目录中。
+* cdn 更新通过发布新版本进行更新。
+* 项目中的html文件不在缓存中！
+* 例子：http://cdn.jonyf.com/cdn_dir/test/1.1.1/css/test.css
+```
 
 ### 更新日志 [CHANGELOG]
 

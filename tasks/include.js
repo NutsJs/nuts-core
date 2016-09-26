@@ -1,19 +1,19 @@
 /**
  * 引入静态资源任务
- * Created by fuhuixiang on 16-8-17.
+ * Created by fuhuixiang on 2016-9-25.
  */
 "use strict";
-const controller = require('../controller'),
-      firFiles   = require('../util/get_dir_file'),
-      path       = require('path'),
-      fs         = require('fs'),
-      packages   = controller.packages;
 
-packages._core.task('include', ()=> {
+const fs            = require('fs'),
+      path          = require('path'),
+      task          = require('gulp'),
+      replacePlugin = require('gulp-replace-pro'),
+      firFiles      = require('../utils/get_dir_file'),
+      config        = require(path.resolve(process.cwd(), 'nuts.config.json'));
 
-    let proName     = controller.arguments()._name,
-        devDir      = `${controller.config.sourceDir}/${proName}`,
-        _staticData = '';
+module.exports = (proName)=> {
+
+    let devDir = `${config.sourceDir}/${proName}`;
 
     if (!proName) {
         console.log('请输入项目名称');
@@ -26,6 +26,7 @@ packages._core.task('include', ()=> {
      * 最后在主 scss 文件中引入新建的静态资源文件。
      */
     firFiles(`${devDir}/images/`, (err, files)=> {
+        let _staticData = '@charset "utf-8";\n';
         if (err) {
             console.log(`${err.path}目录不存在`);
             return null;
@@ -40,15 +41,15 @@ packages._core.task('include', ()=> {
                     console.log(err);
                 } else {
                     console.log('_static文件创建完成');
-                    packages._core.src(`${devDir}/scss/${path.basename(proName)}.scss`)
-                        .pipe(packages._replace({
+                    task.src(`${devDir}/scss/${path.basename(proName)}.scss`)
+                        .pipe(replacePlugin({
                             '@charset "utf-8";': `@charset "utf-8";\n@import "static";`,
                         }))
-                        .pipe(packages._core.dest(`${devDir}/scss/`));
+                        .pipe(task.dest(`${devDir}/scss/`));
                 }
             });
         } else {
             console.log(`目录内没有静态资源`);
         }
     });
-});
+};

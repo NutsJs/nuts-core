@@ -1,8 +1,7 @@
 /**
  * 检测port是否被占用
- * Created by jonnyf on 2015-12-19.
+ * Created by fuhuixiang on 2016-9-25.
  */
-
 'use strict';
 
 const net = require('net');
@@ -13,7 +12,7 @@ module.exports = (port, callback) => {
 
     let timeoutRef = setTimeout(() => {
         calledOnce = true;
-        callback(false, port)
+        callback(false)
     }, 2000);
 
     timeoutRef.unref();
@@ -27,7 +26,7 @@ module.exports = (port, callback) => {
 
         if (!calledOnce) {
             calledOnce = true;
-            callback(true, port);
+            callback(true);
         }
     });
 
@@ -41,7 +40,7 @@ module.exports = (port, callback) => {
 
         if (!calledOnce) {
             calledOnce = result;
-            callback(result, port);
+            callback(result);
         }
     });
 };

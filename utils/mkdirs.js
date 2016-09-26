@@ -1,7 +1,8 @@
 /**
  * 创建多层文件夹 异步
- * Created by fuhuixiang on 16-9-1.
+ * Created by fuhuixiang on 2016-9-24.
  */
+"use strict";
 
 const fs   = require('fs'),
       path = require('path');

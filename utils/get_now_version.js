@@ -2,13 +2,13 @@
  * 获得当前部署的项目的最新版本
  * @param dir
  * @param callBack
- * Created by jonnyf on 2015-12-6.
+ * Created by fuhuixiang on 2015-12-6.
  */
-
 'use strict';
 
 const fs     = require('fs'),
-      config = require('../controller').config;
+      path   = require('path'),
+      config = require(path.resolve(process.cwd(), 'nuts.config.json'));
 
 module.exports = (dir, callBack) => {
 
@@ -71,9 +71,9 @@ module.exports = (dir, callBack) => {
                     files = ['1.1.1'];
                 }
                 console.log('部署目标已存在，正在更新中...');
-                files.forEach((v)=>{
+                files.forEach((v)=> {
                     let intV = v.replace(/\./g, '');
-                    if (!!parseInt(intV)){
+                    if (!!parseInt(intV)) {
                         dirList.push(intV);
                     }
                 });
