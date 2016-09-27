@@ -10,7 +10,7 @@ const fs         = require('fs'),
 fs.exists(configPath, (exists)=> {
     if (exists) {
         try {
-            require(path.resolve(process.cwd(), '../node_modules/wishbao'));
+            require(path.resolve(process.cwd(), './node_modules/wishbao'));
         } catch (err) {
             taskController(require(configPath));
         }
