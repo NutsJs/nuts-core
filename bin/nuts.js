@@ -9,10 +9,13 @@ const fs         = require('fs'),
 
 fs.exists(configPath, (exists)=> {
     if (exists) {
-        try {
-            require(path.resolve(process.cwd(), './node_modules/wishbao'));
-        } catch (err) {
+        let nutsPath = path.resolve(process.cwd(), './node_modules/wishbao/bin');
+
+        // 优先使用本地模块
+        if (nutsPath == __dirname){
             taskController(require(configPath));
+        } else {
+            require(path.resolve(process.cwd(), './node_modules/wishbao/bin/nuts'))();
         }
     } else {
         if (minimist['_'][0] == 'init') {
@@ -71,4 +74,11 @@ function hasProject(name, callback) {
             console.log('项目不存在');
         }
     });
+}
+
+/**
+ * 暴露自身模块
+ */
+module.exports = ()=> {
+    console.log('Nuts 开始运行~');
 }
