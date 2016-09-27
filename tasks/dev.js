@@ -20,22 +20,20 @@ let devDirList = [];
 
 module.exports = (proName, port)=> {
 
-    let devDir  = `${config.sourceDir}/${proName}`,
-        outDir  = `${config.devDir}/${proName}`,
-        scssDir = `${devDir}/scss`,
-        jsDir   = `${devDir}/js`;
+    let devDir = `${config.sourceDir}/${proName}`,
+        outDir = `${config.devDir}/${proName}`;
 
     server({name: proName, port: port}, ()=> {
         //初始化函数
         devDirList = fs.readdirSync(devDir);
         if (devDirList.indexOf('scss') != -1) {
-            compassSass(`${scssDir}/*.scss`, `${outDir}/css`);
+            compassSass(`${devDir}/scss/*.scss`, `${outDir}/css`);
         } else {
             console.log('scss路径不存在');
         }
 
         if (devDirList.indexOf('js') != -1) {
-            es6ToEs5(`${jsDir}/*.js`, `${outDir}/js`, path.basename(proName));
+            es6ToEs5(`${devDir}/js/*.js`, `${outDir}/js`, path.basename(proName));
         } else {
             console.log('js路径不存在');
         }
@@ -52,20 +50,37 @@ module.exports = (proName, port)=> {
         }
         compassFile(`${devDir}/*.html`, outDir);
 
-        task.watch([`${scssDir}/*.scss`, `${jsDir}/*.js`, `${devDir}/*.html`], ()=> {
-            //监控样式表是否改动
-            if (devDirList.indexOf('scss') != -1) {
-                compassSass(`${scssDir}/*.scss`, `${outDir}/css`);
-            }
-
-            //监控js代码是否改变
-            es6ToEs5(`${jsDir}/*.js`, `${outDir}/js`, path.basename(proName));
-
-            // 监控静态文件是否变更
-            compassFile(`${devDir}/*.html`, outDir);
-        });
+        // 监听文件变动
+        taskWatch(devDir, outDir, proName);
     });
 };
+
+/**
+ * 文件变动函数
+ * @param devDir
+ * @param outDir
+ * @param proName
+ */
+function taskWatch(devDir, outDir, proName) {
+
+    //监控js代码是否改变
+    task.watch(`${devDir}/js/*.js`).on('all', (event, filePath, stats)=> {
+        console.log(`文件 ${filePath} 触发 ${event} 事件，重新编译中。。。`);
+        es6ToEs5(filePath, `${outDir}/js`, path.basename(proName));
+    });
+
+    //监控样式表是否改动
+    task.watch(`${devDir}/scss/*.scss`).on('all', (event, filePath, stats)=> {
+        console.log(`文件 ${filePath} 触发 ${event} 事件，重新编译中。。。`);
+        compassSass(filePath, `${outDir}/css`);
+    });
+
+    // 监控静态文件是否变更
+    task.watch(`${devDir}/*.html`).on('all', (event, filePath, stats)=> {
+        console.log(`文件 ${filePath} 触发 ${event} 事件，重新编译中。。。`);
+        compassFile(filePath, outDir);
+    });
+}
 
 /**
  * 对项目中的 scss 文件进行编译
