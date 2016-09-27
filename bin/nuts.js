@@ -29,7 +29,7 @@ fs.exists(configPath, (exists)=> {
  */
 function taskController(config) {
     const taskName = minimist['_'][0];
-    const {name, port, ver} = minimist;
+    const {name, port, ver, dir} = minimist;
 
     switch (taskName) {
         case 'create':
@@ -47,8 +47,8 @@ function taskController(config) {
             });
             break;
         case 'build':
-            hasProject(name, ()=> {
-                require('../tasks/build')(name, ver);
+            hasProject(dir, ()=> {
+                require('../tasks/build')(dir, ver);
             });
             break;
         default:
