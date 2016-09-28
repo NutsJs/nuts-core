@@ -11,7 +11,7 @@ module.exports = (devType)=> {
     // 判断当前环境来加载对应的插件
     try {
         _preset = require.resolve('../../babel-preset-es2015');
-    } catch (err){
+    } catch (err) {
         _preset = require.resolve('../node_modules/babel-preset-es2015')
     }
     return {
@@ -28,6 +28,10 @@ module.exports = (devType)=> {
                 }
             ]
         },
-        plugins: (devType == 'dev') ? [] : [new webpack.optimize.UglifyJsPlugin()]
+        plugins: (devType == 'dev') ? [] : [new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })]
     }
 };
