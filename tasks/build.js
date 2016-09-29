@@ -82,11 +82,24 @@ function outDist(buildDir, nowVersion, devDir) {
         if (err) {
             console.log('scss路径不存在');
         } else {
+            let sassList  = config.sassLib || [],
+                inputList = [];
+            sassList.forEach((v)=> {
+                if (!!path.parse(v).dir) {
+                    inputList.push(v);
+                } else {
+                    try {
+                        inputList = inputList.concat(require(v).includePaths);
+                    } catch (err) {
+                        console.log(`没有找到 ${v} 库`);
+                    }
+                }
+            });
             task.src(`${devDir}/scss/*.scss`)
                 .pipe(printMes('css'))
                 .pipe(plumberPlugin())
                 .pipe(sassPlugin({
-                    includePaths: config.sassLib,
+                    includePaths: sassList,
                     outputStyle: 'compressed'
                 }))
                 .pipe(taskIf(config.needCDN, replacePlugin({

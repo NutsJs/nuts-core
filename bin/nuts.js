@@ -32,11 +32,14 @@ fs.exists(configPath, (exists)=> {
  */
 function taskController(config) {
     const taskName = minimist['_'][0];
-    const {name, port, ver, dir} = minimist;
+    const {name, port, ver, dir, update} = minimist;
 
     switch (taskName) {
         case 'create':
             require('../tasks/create')(name || config.name);
+            break;
+        case 'init':
+            require('../tasks/init')(configPath, update);
             break;
         case 'include':
             require('../tasks/include')(name);
@@ -81,4 +84,4 @@ function hasProject(name, callback) {
  */
 module.exports = ()=> {
     console.log('Nuts 开始运行~');
-}
+};
