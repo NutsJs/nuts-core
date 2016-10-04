@@ -52,7 +52,7 @@ $ nuts create --name <项目名称>
 
 #### 开发项目：
 ```
-$ nuts dev --name <项目名称> --port <端口号>
+$ nuts dev --name <项目名称> [--port <端口号>]
 ```
 
 #### 清除缓存：
