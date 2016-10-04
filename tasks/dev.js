@@ -88,10 +88,23 @@ function taskWatch(devDir, outDir, proName) {
  * @param output
  */
 function compassSass(input, output) {
+    let sassList  = config.sassLib || [],
+        inputList = [];
+    sassList.forEach((v)=> {
+        if (!!path.parse(v).dir) {
+            inputList.push(v);
+        } else {
+            try {
+                inputList = inputList.concat(require(v).includePaths);
+            } catch (err) {
+                console.log(`没有找到 ${v} 库`);
+            }
+        }
+    });
     task.src(input)
         .pipe(plumberPlugin())
         .pipe(sassPlugin({
-            includePaths: config.sassLib
+            includePaths: sassList
         }))
         .pipe(connectPlugin.reload())
         .pipe(task.dest(output));

@@ -22,7 +22,7 @@ module.exports = (option, callback)=> {
                 host: getSelfIP(),
                 livereload: true
             });
-            qrCodePlugin.generate(`http://${getSelfIP()}:${port}`);
+            qrCodePlugin.generate(`http://${getSelfIP()}:${port}`, {small: true});
             callback();
         } else {
             console.log('端口被占用');

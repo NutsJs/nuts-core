@@ -4,23 +4,30 @@
 > 以下带有 [update] 前缀的为不兼容更新，需要注意。而带有 [fix] 前缀的更新为异常修复，建议尽快更新。
 
 
+## 3.1.0
+
+* 修改 SASS 库引入方式为数组传值
+* 新增``` init ```命令的``` --update ```来进行平缓升级
+* 修改二维码尺寸
+* 隐藏``` UglifyJsPlugin ```在部署代码时输出警告
+
 ## 3.0.4
 
 * 现在 nuts 优先加载本地的代码，如果本地不存在才会加载全局的任务。
 * [fix] 修正了开发时无法及时刷新页面的问题。
-* [fix] 修正了编译时缺失关键字的问题。(add --dir xxx)
+* [fix] 修正了编译时缺失关键字的问题。(add ```--dir xxx```)
 * [fix] 修正了编译时无法正确加载插件的问题。
 
 ## 3.0.0
 
 * [update] 安装方式改为全局安装, 现在可以在全局中使用下面的命令了。
 * [update] 更新了 gulp 的版本（3.x=>4.x）。
-* [update] 新增了 nuts init 命令。
-* [update] 更新了 gulp create 命令 => nuts create。
-* [update] 更新了 gulp dev 命令 => nuts dev。
-* [update] 更新了 gulp build 命令 => nuts build。
-* [update] 更新了 gulp include 命令 => nuts include。
-* [update] 更新了 gulp clean 命令 => nuts clean。
+* [update] 新增了``` nuts init ```命令。
+* [update] 更新了``` gulp create ```命令 =>``` nuts create ```。
+* [update] 更新了``` gulp dev ```命令 =>``` nuts dev```。
+* [update] 更新了``` gulp build ```命令 =>``` nuts build```。
+* [update] 更新了``` gulp include ```命令 =>``` nuts include```。
+* [update] 更新了``` gulp clean ```命令 =>``` nuts clean```。
 * [fix] 修复一些积累的问题。
 
 ## 2.1.4
