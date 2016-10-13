@@ -9,4 +9,4 @@ cache:
 node_js:
   - "6"
 after_script:
-  - node test/test-init.js
+  - npm test
