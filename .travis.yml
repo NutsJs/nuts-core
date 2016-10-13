@@ -8,4 +8,4 @@ cache:
 node_js:
   - "6"
 after_script:
-  - npm test
+  - node test/test-init.js
