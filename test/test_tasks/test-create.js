@@ -31,13 +31,12 @@ async.series([
 ], (err, results)=> {
     // 判断任务执行结果
     setTimeout(()=> {
-        console.log(path.resolve(process.cwd(), './test/test_dev/test_1/js/test_1.js'));
         fs.exists(path.resolve(process.cwd(), './test/test_dev/test_1/js/test_1.js'), (exists)=> {
             if (!exists) {
                 throw new Error('项目创建失败');
             }
         });
-        fs.exists(path.resolve(process.cwd(), './src/test_dir/test/js/test.js'), (exists)=> {
+        fs.exists(path.resolve(process.cwd(), './test/test_dev/test_dir/test/js/test.js'), (exists)=> {
             if (!exists) {
                 throw new Error('项目创建失败');
             }
