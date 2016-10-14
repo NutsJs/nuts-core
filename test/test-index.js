@@ -3,9 +3,16 @@
  */
 "use strict";
 
-// require('./test-init');
-let init = require('./test-init');
+const fs = require('fs');
 
-init();
+fs.readdir(`${__dirname}/test_tasks`, (err, files)=> {
+    if (err) {
+        console.log('not found routers');
+    } else {
+        files.forEach((file)=> {
+            // require(`${__dirname}/test_tasks/${file}`);
+        });
+    }
+});
 
-// console.log(init());
+require(`${__dirname}/test_tasks/test-create`);
