@@ -21,9 +21,10 @@ async.series([
         if (!exists) {
             throw new Error('配置文件创建失败');
         } else {
-            if (!require(configPath).author === 'jonnyf') {
+            if (require(configPath).author !== 'jonnyf') {
                 throw new Error('配置文件创建失败');
             }
+            fs.unlinkSync(configPath);
         }
     });
 });

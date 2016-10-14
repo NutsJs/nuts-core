@@ -10,9 +10,9 @@ fs.readdir(`${__dirname}/test_tasks`, (err, files)=> {
         console.log('not found routers');
     } else {
         files.forEach((file)=> {
-            // require(`${__dirname}/test_tasks/${file}`);
+            require(`${__dirname}/test_tasks/${file}`);
         });
     }
 });
 
-require(`${__dirname}/test_tasks/test-create`);
+// require(`${__dirname}/test_tasks/test-include`);

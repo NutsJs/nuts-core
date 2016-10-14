@@ -1,6 +1,6 @@
 /**
- * 创建新项目的测试
- * Created by fuhuixiang on 16-10-13.
+ * include 命令测试
+ * Created by fuhuixiang on 16-10-14.
  */
 "use strict";
 const fs    = require('fs'),
@@ -20,26 +20,22 @@ async.series([
     },
     (callback)=> {
         // 开始任务
-        require('../../tasks/create')('test_1');
-        callback(null, 'create-test1');
-    },
-    (callback)=> {
-        // 开始任务
-        require('../../tasks/create')('test_dir/test');
-        callback(null, 'create-test2');
+        require('../../tasks/include')('test');
+        callback(null, 'test-include');
     }
 ], (err, results)=> {
     // 判断任务执行结果
     setTimeout(()=> {
-        console.log(path.resolve(process.cwd(), './test/test_dev/test_1/js/test_1.js'));
-        fs.exists(path.resolve(process.cwd(), './test/test_dev/test_1/js/test_1.js'), (exists)=> {
+        let outDir = './test/test_dev/test/scss/';
+        fs.exists(path.resolve(process.cwd(), `${outDir}_static.scss`), (exists)=> {
             if (!exists) {
-                throw new Error('项目创建失败');
+                throw new Error('include 命令执行失败');
             }
         });
-        fs.exists(path.resolve(process.cwd(), './src/test_dir/test/js/test.js'), (exists)=> {
-            if (!exists) {
-                throw new Error('项目创建失败');
+        fs.readFile(path.resolve(process.cwd(), `${outDir}test.scss`), 'utf-8', (err, data)=> {
+            let rg = new RegExp('@import "static";', "g");
+            if (err || !rg.test(data)) {
+                throw new Error('include 命令执行失败');
             }
         });
     }, 3000);
