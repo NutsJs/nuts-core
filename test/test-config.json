@@ -8,7 +8,7 @@
     "title": "testTitle",
     "devDir": "test/test_dev",
     "needCDN": true,
-    "staticURL": "http://cdn.jonnyf.com/duobao",
+    "staticURL": "http://cdn.jonnyf.com/images",
     "replaceStr": 666,
     "styleType": "scss",
     "target": "ES6",

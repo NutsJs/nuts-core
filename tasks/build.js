@@ -20,12 +20,9 @@ const fs            = require('fs'),
       webConfig     = require('../utils/get_wp_config')('build'),
       config        = require(path.resolve(process.cwd(), 'nuts.config.json'));
 
-let styleType = 'css';
-
 module.exports = (buildDir, buildVer) => {
     // 获取命令行中的参数
-    let devDir    = `${config.sourceDir}/${buildDir}`,
-        styleType = config.styleType === 'scss' ? 'scss' : 'css';
+    let devDir = `${config.sourceDir}/${buildDir}`;
 
     // 判断参数是否合法
     if (!!buildVer) {
@@ -50,7 +47,8 @@ function outDist(buildDir, nowVersion, devDir) {
     let distStaticDir = `${config.distDir}/${config.staticDir}/${buildDir}/${nowVersion}`,
         staticURL     = config.needCDN ? config.staticURL : `../${config.staticDir}`,
         buildCDNDir   = `${staticURL}/${buildDir}/${nowVersion}`,
-        buildName     = path.basename(buildDir);
+        buildName     = path.basename(buildDir),
+        styleType     = config.styleType === 'scss' ? 'scss' : 'css';
 
     // 部署并压缩javaScript脚本文件
     fs.readdir(`${devDir}/js`, (err) => {
