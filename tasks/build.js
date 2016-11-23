@@ -20,9 +20,12 @@ const fs            = require('fs'),
       webConfig     = require('../utils/get_wp_config')('build'),
       config        = require(path.resolve(process.cwd(), 'nuts.config.json'));
 
-module.exports = (buildDir, buildVer)=> {
+let styleType = 'css';
+
+module.exports = (buildDir, buildVer) => {
     // 获取命令行中的参数
-    let devDir = `${config.sourceDir}/${buildDir}`;
+    let devDir    = `${config.sourceDir}/${buildDir}`,
+        styleType = config.styleType === 'scss' ? 'scss' : 'css';
 
     // 判断参数是否合法
     if (!!buildVer) {
@@ -50,13 +53,13 @@ function outDist(buildDir, nowVersion, devDir) {
         buildName     = path.basename(buildDir);
 
     // 部署并压缩javaScript脚本文件
-    fs.readdir(`${devDir}/js`, (err)=> {
+    fs.readdir(`${devDir}/js`, (err) => {
         if (err) {
             console.log('js路径不存在');
         } else {
             task.src(`${devDir}/js/*.js`)
                 .pipe(plumberPlugin())
-                .pipe(streamPlugin(webConfig))
+                .pipe(taskIf(config.target === 'ES6', streamPlugin(webConfig)))
                 .pipe(renamePlugin(`${buildName}.min.js`))
                 .pipe(taskIf(config.needCDN, replacePlugin('(\.\.\/\i|\i)mages', `${buildCDNDir}/images`)))
                 .pipe(replacePlugin({
@@ -78,13 +81,13 @@ function outDist(buildDir, nowVersion, devDir) {
         .pipe(task.dest(`${distStaticDir}/font/`));
 
     // 部署并压缩需要用到的样式表文件，并且替换样式表中的本地资源为CDN资源
-    fs.readdir(`${devDir}/scss`, (err)=> {
+    fs.readdir(`${devDir}/${styleType}`, (err) => {
         if (err) {
-            console.log('scss路径不存在');
+            console.log(`${styleType}路径不存在`);
         } else {
             let sassList  = config.sassLib || [],
                 inputList = [];
-            sassList.forEach((v)=> {
+            sassList.forEach((v) => {
                 if (!!path.parse(v).dir) {
                     inputList.push(v);
                 } else {
@@ -95,13 +98,13 @@ function outDist(buildDir, nowVersion, devDir) {
                     }
                 }
             });
-            task.src(`${devDir}/scss/*.scss`)
+            task.src(`${devDir}/${styleType}/*.${styleType}`)
                 .pipe(printMes('css'))
                 .pipe(plumberPlugin())
-                .pipe(sassPlugin({
+                .pipe(taskIf(styleType === 'scss', sassPlugin({
                     includePaths: inputList,
                     outputStyle: 'compressed'
-                }))
+                })))
                 .pipe(taskIf(config.needCDN, replacePlugin({
                     '../images/': `${buildCDNDir}/images/`,
                     '../font/': `${buildCDNDir}/font/`
