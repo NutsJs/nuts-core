@@ -7,26 +7,30 @@ const fs         = require('fs'),
       minimist   = require('minimist')(process.argv.slice(2)),
       configPath = path.resolve(process.cwd(), 'nuts.config.json');
 
-// taskController(require(configPath));
+const nativeDev = false;
 
-fs.exists(configPath, (exists)=> {
-    if (exists) {
-        let nutsPath = path.resolve(process.cwd(), './node_modules/wishbao/bin');
+if (nativeDev) {
+    taskController(require(configPath));
+} else {
+    fs.exists(configPath, (exists)=> {
+        if (exists) {
+            let nutsPath = path.resolve(process.cwd(), './node_modules/wishbao/bin');
 
-        // 优先使用本地模块
-        if (nutsPath == __dirname){
-            taskController(require(configPath));
+            // 优先使用本地模块
+            if (nutsPath == __dirname){
+                taskController(require(configPath));
+            } else {
+                require(path.resolve(process.cwd(), './node_modules/wishbao/bin/nuts'))();
+            }
         } else {
-            require(path.resolve(process.cwd(), './node_modules/wishbao/bin/nuts'))();
+            if (minimist['_'][0] == 'init') {
+                require('../tasks/init')(configPath);
+            } else {
+                console.log('未检测到配置文件，请先执行 init 命令创建配置文件');
+            }
         }
-    } else {
-        if (minimist['_'][0] == 'init') {
-            require('../tasks/init')(configPath);
-        } else {
-            console.log('未检测到配置文件，请先执行 init 命令创建配置文件');
-        }
-    }
-});
+    });
+}
 
 /**
  * 任务分发模块

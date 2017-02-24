@@ -6,6 +6,9 @@
 
 const webpack = require('webpack');
 
+// https://github.com/babel/babel-loader/issues/392
+process.noDeprecation = true;
+
 module.exports = (devType)=> {
     let _preset = null;
     // 判断当前环境来加载对应的插件
@@ -17,12 +20,11 @@ module.exports = (devType)=> {
     return {
         watch: false,
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.js$/,
-                    loader: require.resolve('babel-loader'),
-                    exclude: require('path').resolve(__dirname, '../node_modules/'),
-                    query: {
+                    loader: 'babel-loader',
+                    options: {
                         presets: [_preset]
                     }
                 }
@@ -36,6 +38,8 @@ module.exports = (devType)=> {
             'process.env': {
                 NODE_ENV: '"production"'
             }
-        }),]
+        }),
+            new webpack.LoaderOptionsPlugin({minimize: true})
+        ]
     }
 };

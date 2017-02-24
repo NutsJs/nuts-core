@@ -9,6 +9,7 @@
 const fs            = require('fs'),
       path          = require('path'),
       task          = require('gulp'),
+      webpack       = require('webpack'),
       sassPlugin    = require('gulp-sass'),
       renamePlugin  = require('gulp-rename'),
       plumberPlugin = require('gulp-plumber'),
@@ -68,7 +69,7 @@ function outDist(buildDir, nowVersion, devDir) {
         } else {
             task.src(`${devDir}/js/*.js`)
                 .pipe(plumberPlugin())
-                .pipe(taskIf(config.target === 'ES6', streamPlugin(webConfig)))
+                .pipe(taskIf(config.target === 'ES6', streamPlugin(webConfig, webpack)))
                 .pipe(renamePlugin(`${buildName}.min.js`))
                 .pipe(taskIf(config.needCDN, replacePlugin('(\.\.\/\i|\i)mages', `${buildCDNDir}/images`)))
                 .pipe(replacePlugin({
